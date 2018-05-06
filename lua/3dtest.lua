@@ -18,6 +18,8 @@ local enterKey = 32
 	end
 end]]
 
+gpu.setForeground(0x000000)
+
 local w, h = gpu.getResolution()
 
 local direction = 0
@@ -127,7 +129,6 @@ local function draw()
 	drawTime = computer.uptime()
 end
 
-gpu.setForeground(0x000000)
 draw()
 
 while run do
