@@ -7,8 +7,6 @@ local w, h = gpu.getResolution()
 
 run = true
 
-endMessage = nil
-
 toolbarRect = {
 	x = 1,
 	y = h - 1,
@@ -44,17 +42,9 @@ windowToolbarRect = {
 	h = 1
 }
 
-messageRect = {
-	x = 1,
-	y = 1,
-	w = 30,
-	h = 3
-}
-
 menu, drawedMenu = false, false
 window, drawedWindow = nil, nil
 mesage, drawedMessage = nil, nil
-messageTimer = 0
 
 local function quit()
 	run = false
@@ -107,19 +97,6 @@ local function updateDraw()
 		fill(windowRect)
 		drawedWindow = window
 	end
-	
-	if drawedMessage == nil and message ~= nil then
-		gpu.setBackground(0xFFFFFF)
-		fill(messageRect)
-		term.setCursor(1, 1)
-		gpu.setForeground(0x000000)
-		print(message)
-		drawedMessage = message
-	elseif message == nil and drawedMessage ~= nil then
-		gpu.setBackground(0x000000)
-		fill(messageRect)
-		drawedMessage = message
-	end
 end
 
 local function collide(rect, e)
@@ -169,12 +146,6 @@ local function update()
 		end
 	elseif e[1] == "touch" then
 		click(e)
-	elseif e[1] == "component_added" then
-		messageTimer = 10000
-		message = e[1]
-	else
-		messageTimer = 1000
-		message = e[1]
 	end
 	updateDraw()
 	if messageTimer > 0 then
@@ -193,7 +164,3 @@ end
 gpu.setForeground(0xFFFFFF)
 gpu.setBackground(0x000000)
 term.clear()
-
-if endMessage ~= nil then
-	print(endMessage)
-end
