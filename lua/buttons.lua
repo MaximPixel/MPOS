@@ -148,11 +148,6 @@ local function update()
 		click(e)
 	end
 	updateDraw()
-	if messageTimer > 0 then
-		messageTimer = messageTimer - 1
-	else
-		message = nil
-	end
 end
 
 firstDraw()
