@@ -116,11 +116,10 @@ local function draw()
 	gpu.setBackground(0x000000)
 	gpu.fill(1, 1, w, h, " ")
 	
+	gpu.setBackground(0xFF0000)
 	for i = 1, #poss do
-		gpu.setBackground(0xFF0000)
 		p = toScreenPos(toCamPos(poss[i]))
 		point(p[1], p[2])
-		gpu.setBackground(0x000000)
 	end
 	
 	term.setCursor(1, 1)
@@ -128,6 +127,7 @@ local function draw()
 	drawTime = computer.uptime()
 end
 
+gpu.setForeground(0x000000)
 draw()
 
 while run do
