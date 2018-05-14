@@ -18,8 +18,8 @@ pixels = {}
 
 for i = 1, w do
 	for j = 1, h do
-		lastPixels[i * w + j] = false
-		pixels[i * w + j] = false
+		lastPixels[i * h + j] = false
+		pixels[i * h + j] = false
 	end
 end
 
@@ -123,8 +123,8 @@ local function draw()
 	
 	for i = 1, w do
 		for j = 1, h do
-			a = lastPixels[i * w + j]
-			b = pixels[i * w + j]
+			a = lastPixels[i * h + j]
+			b = pixels[i * h + j]
 			if a == true and b == false then
 				gpu.setBackground(0x000000)
 				gpu.set(i, j, " ")
