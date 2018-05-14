@@ -76,7 +76,7 @@ drawTime = computer.uptime()
 
 local poss = {}
 
-poss[#poss + 1] = {-5 + 30, -5, -5}
+poss[#poss + 1] = {25, -5, -5}
 poss[#poss + 1] = {5 + 30, -5, -5}
 poss[#poss + 1] = {-5 + 30, -5, 5}
 poss[#poss + 1] = {5 + 30, -5, 5}
