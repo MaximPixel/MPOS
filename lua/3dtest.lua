@@ -69,7 +69,7 @@ local function toScreenPos(pos)
 end
 
 function point(x, y)
-	pixels[math.floor(x)][math.floor(y)] = true
+		pixels[math.floor(x)][math.floor(y)] = true
 end
 end
 
