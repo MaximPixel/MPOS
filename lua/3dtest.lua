@@ -69,7 +69,7 @@ local function toScreenPos(pos)
 end
 
 function point(x, y)
-		pixels[math.floor(x)][math.floor(y)] = true
+	pixels[math.floor(x)][math.floor(y)] = true
 end
 
 drawTime = computer.uptime()
@@ -128,9 +128,11 @@ local function draw()
 			if a == true and b == false then
 				gpu.setBackground(0x000000)
 				gpu.set(i, j, " ")
+				lastPixels[i * h + j] = false
 			elseif a == false and b == true then
 				gpu.setBackground(0xFF0000)
 				gpu.set(i, j, " ")
+				lastPixels[i * h + j] = true
 			end
 		end
 	end
