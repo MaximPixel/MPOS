@@ -13,8 +13,8 @@ local enterKey = 32
 
 local w, h = gpu.getResolution()
 
-lastPixels = {}
-pixels = {}
+lastPixels = {}, {}
+pixels = {}, {}
 
 for i = 1, w do
 	for j = 1, h do
