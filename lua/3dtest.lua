@@ -59,8 +59,8 @@ local function toCamPos(pos)
 end
 
 local function toScreenPos(pos)
-	ah = math.atan2(pos[2], pos[1])
-	av = math.atan2(pos[3], pos[1])
+	ah = math.atan(pos[2], pos[1])
+	av = math.atan(pos[3], pos[1])
 	
 	ah = ah / math.abs(math.cos(ah))
 	av = av / math.abs(math.cos(av))
