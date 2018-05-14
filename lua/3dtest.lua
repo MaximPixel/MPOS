@@ -11,16 +11,19 @@ local aKey = 97
 local dKey = 100
 local enterKey = 32
 
---[[while true do
-	e = {event.pull()}
-	if e[1] == "key_down" then
-		print(e[3])
+local w, h = gpu.getResolution()
+
+lastPixels = {}
+pixels = {}
+
+for i = 1, w do
+	for j = 1, h do
+		lastPixels[i][j] = false
+		pixels[i][j] = false
 	end
-end]]
+end
 
 gpu.setForeground(0x000000)
-
-local w, h = gpu.getResolution()
 
 local direction = 0
 local rotY = 0
@@ -68,60 +71,71 @@ local function toScreenPos(pos)
 end
 
 local function point(x, y)
-	gpu.set(math.floor(x), math.floor(y), " ")
+	pixels[math.floor(x)][math.floor(y)]
+	--gpu.set(math.floor(x), math.floor(y), " ")
 end
 
 drawTime = computer.uptime()
+
+local poss = {}
+
+poss[#poss + 1] = {-5 + 30, -5, -5}
+poss[#poss + 1] = {5 + 30, -5, -5}
+poss[#poss + 1] = {-5 + 30, -5, 5}
+poss[#poss + 1] = {5 + 30, -5, 5}
+poss[#poss + 1] = {-5 + 30, 5, -5}
+poss[#poss + 1] = {5 + 30, 5, -5}
+poss[#poss + 1] = {-5 + 30, 5, 5}
+poss[#poss + 1] = {5 + 30, 5, 5}
+
+poss[#poss + 1] = {-5 - 30, -5, -5}
+poss[#poss + 1] = {5 - 30, -5, -5}
+poss[#poss + 1] = {-5 - 30, -5, 5}
+poss[#poss + 1] = {5 - 30, -5, 5}
+poss[#poss + 1] = {-5 - 30, 5, -5}
+poss[#poss + 1] = {5 - 30, 5, -5}
+poss[#poss + 1] = {-5 - 30, 5, 5}
+poss[#poss + 1] = {5 - 30, 5, 5}
+
+poss[#poss + 1] = {-5, -5 - 30, -5}
+poss[#poss + 1] = {5, -5 - 30, -5}
+poss[#poss + 1] = {-5, -5 - 30, 5}
+poss[#poss + 1] = {5, -5 - 30, 5}
+poss[#poss + 1] = {-5, 5 - 30, -5}
+poss[#poss + 1] = {5, 5 - 30, -5}
+poss[#poss + 1] = {-5, 5 - 30, 5}
+poss[#poss + 1] = {5, 5 - 30, 5}
+
+poss[#poss + 1] = {-5, -5 + 30, -5}
+poss[#poss + 1] = {5, -5 + 30, -5}
+poss[#poss + 1] = {-5, -5 + 30, 5}
+poss[#poss + 1] = {5, -5 + 30, 5}
+poss[#poss + 1] = {-5, 5 + 30, -5}
+poss[#poss + 1] = {5, 5 + 30, -5}
+poss[#poss + 1] = {-5, 5 + 30, 5}
+poss[#poss + 1] = {5, 5 + 30, 5}
 
 local function draw()
 
 	drawTime = computer.uptime()
 	
-	poss = {}
-	
-	poss[#poss + 1] = {-5 + 30, -5, -5}
-	poss[#poss + 1] = {5 + 30, -5, -5}
-	poss[#poss + 1] = {-5 + 30, -5, 5}
-	poss[#poss + 1] = {5 + 30, -5, 5}
-	poss[#poss + 1] = {-5 + 30, 5, -5}
-	poss[#poss + 1] = {5 + 30, 5, -5}
-	poss[#poss + 1] = {-5 + 30, 5, 5}
-	poss[#poss + 1] = {5 + 30, 5, 5}
-	
-	poss[#poss + 1] = {-5 - 30, -5, -5}
-	poss[#poss + 1] = {5 - 30, -5, -5}
-	poss[#poss + 1] = {-5 - 30, -5, 5}
-	poss[#poss + 1] = {5 - 30, -5, 5}
-	poss[#poss + 1] = {-5 - 30, 5, -5}
-	poss[#poss + 1] = {5 - 30, 5, -5}
-	poss[#poss + 1] = {-5 - 30, 5, 5}
-	poss[#poss + 1] = {5 - 30, 5, 5}
-	
-	poss[#poss + 1] = {-5, -5 - 30, -5}
-	poss[#poss + 1] = {5, -5 - 30, -5}
-	poss[#poss + 1] = {-5, -5 - 30, 5}
-	poss[#poss + 1] = {5, -5 - 30, 5}
-	poss[#poss + 1] = {-5, 5 - 30, -5}
-	poss[#poss + 1] = {5, 5 - 30, -5}
-	poss[#poss + 1] = {-5, 5 - 30, 5}
-	poss[#poss + 1] = {5, 5 - 30, 5}
-	
-	poss[#poss + 1] = {-5, -5 + 30, -5}
-	poss[#poss + 1] = {5, -5 + 30, -5}
-	poss[#poss + 1] = {-5, -5 + 30, 5}
-	poss[#poss + 1] = {5, -5 + 30, 5}
-	poss[#poss + 1] = {-5, 5 + 30, -5}
-	poss[#poss + 1] = {5, 5 + 30, -5}
-	poss[#poss + 1] = {-5, 5 + 30, 5}
-	poss[#poss + 1] = {5, 5 + 30, 5}
-	
-	gpu.setBackground(0x000000)
-	gpu.fill(1, 1, w, h, " ")
-	
-	gpu.setBackground(0xFF0000)
 	for i = 1, #poss do
 		p = toScreenPos(toCamPos(poss[i]))
 		point(p[1], p[2])
+	end
+	
+	for i = 1, w do
+		for j = 1, h do
+			a = lastPixels[i][j]
+			b = pixels[i][j]
+			if a == true and b == false then
+				gpu.setBackground(0x000000)
+				gpu.set(i, j, " ")
+			elseif a == false and b == true then
+				gpu.setBackground(0xFF0000)
+				gpu.set(i, j, " ")
+			end
+		end
 	end
 	
 	term.setCursor(1, 1)
