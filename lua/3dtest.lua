@@ -71,7 +71,6 @@ end
 function point(x, y)
 		pixels[math.floor(x)][math.floor(y)] = true
 end
-end
 
 drawTime = computer.uptime()
 
