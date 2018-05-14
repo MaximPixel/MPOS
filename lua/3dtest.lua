@@ -71,7 +71,7 @@ local function toScreenPos(pos)
 end
 
 local function point(x, y)
-	pixels[math.floor(x)][math.floor(y)]
+	pixels[math.floor(x)][math.floor(y)] = true
 	--gpu.set(math.floor(x), math.floor(y), " ")
 end
 
