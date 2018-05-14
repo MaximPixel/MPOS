@@ -66,12 +66,11 @@ local function toScreenPos(pos)
 	av = av / math.abs(math.cos(av))
 	
 	return {w / 2 - ah * w / fov, h / 2 - av * w / fov, 0}
-	
-	--return {w / 2 - pos[1], h / 2 - pos[2], 0}
 end
 
 function point(x, y)
 	pixels[math.floor(x)][math.floor(y)] = true
+end
 end
 
 drawTime = computer.uptime()
