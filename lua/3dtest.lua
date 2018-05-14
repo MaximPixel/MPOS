@@ -13,13 +13,13 @@ local enterKey = 32
 
 local w, h = gpu.getResolution()
 
-lastPixels = {}, {}
-pixels = {}, {}
+lastPixels = {}
+pixels = {}
 
 for i = 1, w do
 	for j = 1, h do
-		lastPixels[i][j] = false
-		pixels[i][j] = false
+		lastPixels[i * w + j] = false
+		pixels[i * w + j] = false
 	end
 end
 
@@ -123,8 +123,8 @@ local function draw()
 	
 	for i = 1, w do
 		for j = 1, h do
-			a = lastPixels[i][j]
-			b = pixels[i][j]
+			a = lastPixels[i * w + j]
+			b = pixels[i * w + j]
 			if a == true and b == false then
 				gpu.setBackground(0x000000)
 				gpu.set(i, j, " ")
