@@ -70,9 +70,8 @@ local function toScreenPos(pos)
 	--return {w / 2 - pos[1], h / 2 - pos[2], 0}
 end
 
-local function point(x, y)
+function point(x, y)
 	pixels[math.floor(x)][math.floor(y)] = true
-	--gpu.set(math.floor(x), math.floor(y), " ")
 end
 
 drawTime = computer.uptime()
