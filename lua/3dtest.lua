@@ -16,14 +16,14 @@ local w, h = gpu.getResolution()
 lastPixels = {}
 pixels = {}
 
-for i = 1, w do
-	for j = 1, h do
-		lastPixels[i * h + j] = false
-		pixels[i * h + j] = false
-	end
+for i = 1, w * h do
+	lastPixels[i] = false
+	pixels[i] = false
 end
 
 gpu.setForeground(0x000000)
+
+gpu.fill(1, 1, w, h, " ")
 
 local direction = 0
 local rotY = 0
@@ -123,16 +123,16 @@ local function draw()
 	
 	for i = 1, w do
 		for j = 1, h do
-			a = lastPixels[i * h + j]
-			b = pixels[i * h + j]
+			a = lastPixels[i * w + j]
+			b = pixels[i * w + j]
 			if a == true and b == false then
 				gpu.setBackground(0x000000)
 				gpu.set(i, j, " ")
-				lastPixels[i * h + j] = false
+				lastPixels[i * w + j] = false
 			elseif a == false and b == true then
 				gpu.setBackground(0xFF0000)
 				gpu.set(i, j, " ")
-				lastPixels[i * h + j] = true
+				lastPixels[i * w + j] = true
 			end
 		end
 	end
